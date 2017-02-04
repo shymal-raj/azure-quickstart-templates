@@ -116,12 +116,6 @@
           "computerName": "[variables('vmName')]",
         },
         "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "5.1.8",
-            "version": "latest"
-          },
           "osDisk": {
             "name": "osdisk",
             "vhd": {
