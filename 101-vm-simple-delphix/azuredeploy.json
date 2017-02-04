@@ -10,10 +10,10 @@
     },
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'safreebsdvm')]",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'delphixvm')]",
     "imagePublisher": "MicrosoftOSTC",
     "imageOffer": "Delphix",
-    "OSDiskName": "osdiskfordelphiximple",
+    "OSDiskName": "dlpx-hyperv",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
