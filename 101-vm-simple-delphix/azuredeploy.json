@@ -10,7 +10,7 @@
     },
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'delphixstorage')]",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'dlpxvm')]",
     "imagePublisher": "MicrosoftOSTC",
     "imageOffer": "Delphix",
     "OSDiskName": "dlpx-518",
