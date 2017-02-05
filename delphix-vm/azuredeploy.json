@@ -8,16 +8,6 @@
         "description": "Uri of the existing VHD"
       }
     },
-    "osType": {
-      "type": "string",
-      "allowedValues": [
-        "Windows",
-        "Linux"
-      ],
-      "metadata": {
-        "description": "Type of OS on the existing vhd"
-      }
-    },
     "vmSize": {
       "type": "string",
       "allowedValues": [
@@ -124,7 +114,7 @@
       "storageProfile": {
         "osDisk": {
           "name": "[concat(parameters('vmName'),'-osDisk')]",
-          "osType": "[parameters('osType')]",
+          "osType": "Linux",
           "caching": "ReadWrite",
           "vhd": {
             "uri": "[parameters('osDiskVhdUri')]"
