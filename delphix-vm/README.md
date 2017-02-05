@@ -1,15 +1,22 @@
-# Create a Virtual Machine from a User Image
+# Create a VM from a specialized VHD disk
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fdelphix-vm%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrwilson%2Fazure-quickstart-templates%2Fmaster%2Fdelphix-vm%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fdelphix-vm%2Fazuredeploy.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fgrwilson%2Fazure-quickstart-templates%2Fmaster%2Fdelphix-vm%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-> Prerequisite - The Storage Account with the User Image VHD should already exist
+## Prerequisite 
+- VHD file that you want to create a VM from already exists in a storage account.
 
-This template allows you to create a Virtual Machines from a User image. This template also deploys a Virtual Network, Public IP addresses and a Network Interface.
+```
+NOTE
+
+This template will create an additional Standard_GRS storage account for enabling boot diagnostics each time you execute this template. To avoid running into storage account limits, it's best to delete the storage account when the VM is deleted.
+```
+
+This template creates a VM from a specialized VHD. The VHD file can be located in a storage account using a tool such as Azure Storage Explorer http://storageexplorer.com/
 
 If you are looking to accomplish the above scenario through PowerShell instead of a template, you can use a PowerShell script like below
 
@@ -48,20 +55,15 @@ If you are looking to accomplish the above scenario through PowerShell instead o
     $nic = New-AzureRmNetworkInterface -Name $nicname -ResourceGroupName $rgName -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
 
 ##### Compute
+
     ## Setup local VM object
     $cred = Get-Credential
     $vm = New-AzureRmVMConfig -VMName $vmName -VMSize $vmSize
-    $vm = Set-AzureRmVMOperatingSystem -VM $vm -Windows -ComputerName $computerName -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
 
     $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $nic.Id
 
-    $osDiskUri = "http://test.blob.core.windows.net/vmcontainer10798c80-131-1231-a94a-f9d2a712251f/osDisk.10798c80-2919-4100-a94a-f9d2a712251f.vhd"
-    $imageUri = "http://test.blob.core.windows.net/system/Microsoft.Compute/Images/captured/image-osDisk.8b021d87-913c-4f94-a01a-944ad92d7388.vhd"
-    $vm = Set-AzureRmVMOSDisk -VM $vm -Name $osDiskName -VhdUri $osDiskUri -CreateOption fromImage -SourceImageUri $imageUri -Windows
-
-    $dataImageUri = "http://test.blob.core.windows.net/system/Microsoft.Compute/Images/captured/image-dataDisk-0.8b021d87-913c-4f94-a01a-944ad92d7388.vhd"
-    $dataDiskUri = "http://test.blob.core.windows.net/vmcontainer10798c80-sa11-41sa-dsad-f9d2a712251f/dataDisk-0.10798c80-2919-4100-a94a-f9d2a712251f.vhd"
-    $vm = Add-AzureRmVMDataDisk -VM $vm -Name "dd1" -VhdUri $dataDiskUri -SourceImageUri $dataImageUri -Lun 0 -CreateOption fromImage
+    $osDiskUri = "https://test.blob.core.windows.net/vhds/osdiskforlinuxsimple.vhd"
+    $vm = Set-AzureRmVMOSDisk -VM $vm -Name $osDiskName -VhdUri $osDiskUri -CreateOption attach -Linux
 
     ## Create the VM in Azure
-    New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vm -Verbose
+    New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vm -Verbose -Debug
