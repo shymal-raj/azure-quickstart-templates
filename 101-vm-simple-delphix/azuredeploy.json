@@ -10,10 +10,10 @@
     },
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'delphixvm')]",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'delphixstorage')]",
     "imagePublisher": "MicrosoftOSTC",
     "imageOffer": "Delphix",
-    "OSDiskName": "dlpx-hyperv",
+    "OSDiskName": "dlpx-518",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
@@ -24,7 +24,7 @@
     "vmStorageAccountContainerName": "vhds",
     "vmName": "delphix",
     "vmSize": "Standard_A3",
-    "virtualNetworkName": "MyVNET",
+    "virtualNetworkName": "delphixvnet",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
