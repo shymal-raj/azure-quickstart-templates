@@ -234,7 +234,7 @@
             "typeHandlerVersion": "1.4",
             "settings": {
               "fileUris": [
-                "https://raw.githubusercontent.com/grwilson/azure-quickstart-templates/master/delphix-vm-custom-image-new-storage-account/ImageTransfer.ps1"
+                "https://raw.githubusercontent.com/grwilson/azure-quickstart-templates/master/delphix-golden-vm/ImageTransfer.ps1"
               ]
             },
             "protectedSettings": {
