@@ -11,23 +11,14 @@
     "userImageStorageAccountResourceGroupName": {
       "value": "customubrg"
     },
-    "adminUsername": {
-      "value": "user"
-    },
-    "adminPassword": {
-      "value": "GEN-PASSWORD"
-    },
     "osDiskVhdUri": {
       "value": "https://customubrgdisks112.blob.core.windows.net/vhds/customub20161011133129.vhd"
     },
     "dnsLabelPrefix": {
       "value": "customklayip2"
     },
-    "osType": {
-      "value": "Linux"
-    },
     "vmSize": {
-      "value": "Standard_A2"
+      "value": "Standard_A4"
     },
     "newOrExistingVnet": {
       "value": "existing"

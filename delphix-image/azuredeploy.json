@@ -32,30 +32,14 @@
         "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
       }
     },
-    "adminUserName": {
-      "type": "string",
-      "metadata": {
-        "description": "User Name for the Virtual Machine"
-      }
-    },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine"
-      }
-    },
-    "osType": {
-      "type": "string",
-      "allowedValues": [
-        "Windows",
-        "Linux"
-      ],
-      "metadata": {
-        "description": "This is the OS that your VM will be running"
-      }
-    },
     "vmSize": {
       "type": "string",
+      "allowedValues": [
+        "Standard_A4",
+        "Standard_A7",
+        "Standard_A4_v2",
+        "Standard_D3"
+      ],
       "metadata": {
         "description": "This is the size of your VM"
       }
@@ -171,13 +155,13 @@
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminUsername": "delphix",
+          "adminPassword": "delphix123"
         },
         "storageProfile": {
           "osDisk": {
             "name": "[concat(variables('vmName'),'-osDisk')]",
-            "osType": "[parameters('osType')]",
+            "osType": "Linux",
             "caching": "ReadWrite",
             "createOption": "FromImage",
             "image": {
