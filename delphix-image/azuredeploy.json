@@ -156,7 +156,7 @@
         "osProfile": {
           "computerName": "[variables('vmName')]",
           "adminUsername": "delphix",
-          "adminPassword": "delphix123"
+          "adminPassword": "!Delphix123VM"
         },
         "storageProfile": {
           "osDisk": {
