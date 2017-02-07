@@ -18,7 +18,7 @@
       "value": "customklayip2"
     },
     "vmSize": {
-      "value": "Standard_A2"
+      "value": "Standard_A4"
     },
     "newOrExistingVnet": {
       "value": "existing"
