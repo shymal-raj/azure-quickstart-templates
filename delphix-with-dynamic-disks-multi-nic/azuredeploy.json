@@ -1,0 +1,620 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "customVmName": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the name of the your VM"
+      }
+    },
+    "userImageStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the name of the your storage account"
+      }
+    },
+    "userImageStorageAccountResourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group of the existing storage account"
+      }
+    },
+    "osDiskVhdUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Uri of the your user image"
+      }
+    },
+    "dnsLabelPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_DS2_v2",
+      "allowedValues": [
+        "Standard_DS2_v2",
+        "Standard_DS3_v2",
+        "Standard_DS4_v2",
+        "Standard_DS5_v2",
+        "Standard_A4",
+        "Standard_A7",
+        "Standard_A4_v2",
+        "Standard_D3",
+	    "Standard_D14",
+        "Standard_G3",
+        "Standard_G4",
+        "Standard_GS3",
+        "Standard_GS4"
+      ],
+      "metadata": {
+        "description": "This is the size of your VM"
+      }
+    },
+    "newOrExistingVnet": {
+      "allowedValues": [ "new", "existing" ],
+      "type": "string",
+      "metadata": {
+        "description":  "Select if this template needs a new VNet or will reference an existing VNet"
+      }
+    },
+    "newOrExistingVnetName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "New or Existing VNet Name"
+      }
+    },
+    "newOrExistingSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "New or Existing subnet Name"
+      }
+    },
+    "existingVnetResourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group of the existing VNET"
+      }
+    },
+    "numDataDisks": {
+      "type": "int",
+      "maxValue": 40,
+      "defaultValue": 3,
+      "metadata": {
+        "description": "Number of data disks"
+      }
+    },
+    "sizeOfDataDisksInGB": {
+      "type": "int",
+      "maxValue": 20000,
+      "defaultValue": 8,
+      "metadata": {
+        "description": "Size of each data disk"
+      }
+  },
+  "variables": {
+    "publicIPAddressName": "[concat(parameters('customVmName'),'IP')]",
+    "vmName": "[parameters('customVmName')]",
+    "nicName": "[concat(parameters('customVmName'),'Nic')]",
+    "publicIPAddressType": "Dynamic",
+    "apiVersion": "2015-06-15",
+    "templatelink": "[concat('https://raw.githubusercontent.com/singhkay/azure-quickstart-templates/master/101-vm-from-user-image/',parameters('newOrExistingVnet'),'vnet.json')]",
+    "diskCaching": "ReadWrite",
+    "diskArray": [
+      {
+        "name": "datadisk1",
+        "lun": 0,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk1.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk2",
+        "lun": 1,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk2.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk3",
+        "lun": 2,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk3.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk4",
+        "lun": 3,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk4.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk5",
+        "lun": 4,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk5.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk6",
+        "lun": 5,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk6.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk7",
+        "lun": 6,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk7.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk8",
+        "lun": 7,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk8.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk9",
+        "lun": 8,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk9.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk10",
+        "lun": 9,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk10.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk11",
+        "lun": 10,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk11.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk12",
+        "lun": 11,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk12.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk13",
+        "lun": 12,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk13.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk14",
+        "lun": 13,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk14.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk15",
+        "lun": 14,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk15.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk16",
+        "lun": 15,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk16.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk17",
+        "lun": 16,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk17.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk18",
+        "lun": 17,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk18.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk19",
+        "lun": 18,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk19.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk20",
+        "lun": 19,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk20.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk21",
+        "lun": 20,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk21.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk22",
+        "lun": 21,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk22.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk23",
+        "lun": 22,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk23.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk24",
+        "lun": 23,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk24.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk25",
+        "lun": 24,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk25.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk26",
+        "lun": 25,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk26.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk27",
+        "lun": 26,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk27.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk28",
+        "lun": 27,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk28.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk29",
+        "lun": 28,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk29.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk30",
+        "lun": 29,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk30.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk31",
+        "lun": 30,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk31.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk32",
+        "lun": 31,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk32.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk33",
+        "lun": 32,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk33.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk34",
+        "lun": 33,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk34.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk35",
+        "lun": 34,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk35.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk36",
+        "lun": 35,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk36.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk37",
+        "lun": 36,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk37.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk38",
+        "lun": 37,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk38.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk39",
+        "lun": 38,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk39.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk40",
+        "lun": 39,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk40.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      }
+    ]
+ },
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "vnet-template",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "incremental",
+        "templateLink": {
+            "uri": "[variables('templatelink')]",
+            "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualNetworkName": {
+              "value": "[parameters('newOrExistingVnetName')]"
+          },
+          "subnetName": {
+              "value": "[parameters('newOrExistingSubnetName')]"
+          },
+          "existingVnetResourceGroupName": {
+              "value": "[parameters('existingVnetResourceGroupName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[variables('publicIPAddressName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+        }
+      }
+    },
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[variables('nicName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+        "Microsoft.Resources/deployments/vnet-template"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+              },
+              "subnet": {
+                "id": "[reference('vnet-template').outputs.subnet1Ref.value]"
+              }
+            }
+          }
+        ]
+      }
+   },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[variables('vmName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[variables('vmName')]",
+          "adminUsername": "delphix",
+          "adminPassword": "!Delphix123VM"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "name": "[concat(variables('vmName'),'-osDisk')]",
+            "osType": "Linux",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "image": {
+              "uri": "[parameters('osDiskVhdUri')]"
+            },
+            "vhd": {
+              "uri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob, 'vhds/',variables('vmName'), uniquestring(resourceGroup().id), 'osDisk.vhd')]"
+            }
+          },
+	      "dataDisks": "[take(variables('diskArray'),parameters('numDataDisks'))]"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": "false",
+            "storageUri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob)]"
+          }
+        }
+      }
+    }
+  ]
+}
