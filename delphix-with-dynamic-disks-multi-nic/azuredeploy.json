@@ -95,6 +95,7 @@
       "metadata": {
         "description": "Size of each data disk"
       }
+    }
   },
   "variables": {
     "publicIPAddressName": "[concat(parameters('customVmName'),'IP')]",
