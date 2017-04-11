@@ -83,7 +83,7 @@
     },
     "numDataDisks": {
       "type": "int",
-      "maxValue": 40,
+      "maxValue": 64,
       "defaultValue": 3,
       "metadata": {
         "description": "Number of data disks"
@@ -504,6 +504,16 @@
         "lun": 39,
         "vhd": {
           "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk40.vhd')]"
+        },
+        "createOption": "Empty",
+        "caching": "[variables('diskCaching')]",
+        "diskSizeGB": "[variables('sizeOfDataDisksInGB')]"
+      },
+      {
+        "name": "datadisk41",
+        "lun": 40,
+        "vhd": {
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk41.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
