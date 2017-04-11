@@ -17,6 +17,9 @@
     "dnsLabelPrefix": {
       "value": "customklayip2"
     },
+    "userContainerName": {
+      "value": "customctr"
+    },
     "vmSize": {
       "value": "Standard_A4"
     },

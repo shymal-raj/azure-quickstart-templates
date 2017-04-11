@@ -32,6 +32,12 @@
         "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
       }
     },
+    "userContainerName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of container to use."
+      }
+    },
     "vmSize": {
       "type": "string",
       "defaultValue": "Standard_DS2_v2",
@@ -114,7 +120,7 @@
         "name": "datadisk1",
         "lun": 0,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk1.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk1.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -124,7 +130,7 @@
         "name": "datadisk2",
         "lun": 1,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk2.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk2.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -134,7 +140,7 @@
         "name": "datadisk3",
         "lun": 2,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk3.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk3.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -144,7 +150,7 @@
         "name": "datadisk4",
         "lun": 3,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk4.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk4.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -154,7 +160,7 @@
         "name": "datadisk5",
         "lun": 4,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk5.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk5.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -164,7 +170,7 @@
         "name": "datadisk6",
         "lun": 5,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk6.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk6.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -174,7 +180,7 @@
         "name": "datadisk7",
         "lun": 6,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk7.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk7.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -184,7 +190,7 @@
         "name": "datadisk8",
         "lun": 7,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk8.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk8.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -194,7 +200,7 @@
         "name": "datadisk9",
         "lun": 8,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk9.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk9.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -204,7 +210,7 @@
         "name": "datadisk10",
         "lun": 9,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk10.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk10.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -214,7 +220,7 @@
         "name": "datadisk11",
         "lun": 10,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk11.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk11.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -224,7 +230,7 @@
         "name": "datadisk12",
         "lun": 11,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk12.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk12.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -234,7 +240,7 @@
         "name": "datadisk13",
         "lun": 12,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk13.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk13.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -244,7 +250,7 @@
         "name": "datadisk14",
         "lun": 13,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk14.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk14.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -254,7 +260,7 @@
         "name": "datadisk15",
         "lun": 14,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk15.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk15.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -264,7 +270,7 @@
         "name": "datadisk16",
         "lun": 15,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk16.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk16.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -274,7 +280,7 @@
         "name": "datadisk17",
         "lun": 16,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk17.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk17.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -284,7 +290,7 @@
         "name": "datadisk18",
         "lun": 17,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk18.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk18.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -294,7 +300,7 @@
         "name": "datadisk19",
         "lun": 18,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk19.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk19.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -304,7 +310,7 @@
         "name": "datadisk20",
         "lun": 19,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk20.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk20.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -314,7 +320,7 @@
         "name": "datadisk21",
         "lun": 20,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk21.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk21.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -324,7 +330,7 @@
         "name": "datadisk22",
         "lun": 21,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk22.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk22.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -334,7 +340,7 @@
         "name": "datadisk23",
         "lun": 22,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk23.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk23.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -344,7 +350,7 @@
         "name": "datadisk24",
         "lun": 23,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk24.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk24.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -354,7 +360,7 @@
         "name": "datadisk25",
         "lun": 24,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk25.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk25.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -364,7 +370,7 @@
         "name": "datadisk26",
         "lun": 25,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk26.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk26.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -374,7 +380,7 @@
         "name": "datadisk27",
         "lun": 26,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk27.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk27.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -384,7 +390,7 @@
         "name": "datadisk28",
         "lun": 27,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk28.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk28.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -394,7 +400,7 @@
         "name": "datadisk29",
         "lun": 28,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk29.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk29.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -404,7 +410,7 @@
         "name": "datadisk30",
         "lun": 29,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk30.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk30.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -414,7 +420,7 @@
         "name": "datadisk31",
         "lun": 30,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk31.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk31.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -424,7 +430,7 @@
         "name": "datadisk32",
         "lun": 31,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk32.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk32.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -434,7 +440,7 @@
         "name": "datadisk33",
         "lun": 32,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk33.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk33.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -444,7 +450,7 @@
         "name": "datadisk34",
         "lun": 33,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk34.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk34.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -454,7 +460,7 @@
         "name": "datadisk35",
         "lun": 34,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk35.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk35.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -464,7 +470,7 @@
         "name": "datadisk36",
         "lun": 35,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk36.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk36.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -474,7 +480,7 @@
         "name": "datadisk37",
         "lun": 36,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk37.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk37.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -484,7 +490,7 @@
         "name": "datadisk38",
         "lun": 37,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk38.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk38.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -494,7 +500,7 @@
         "name": "datadisk39",
         "lun": 38,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk39.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk39.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -504,7 +510,7 @@
         "name": "datadisk40",
         "lun": 39,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk40.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk40.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -514,7 +520,7 @@
         "name": "datadisk41",
         "lun": 40,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk41.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk41.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -524,7 +530,7 @@
         "name": "datadisk42",
         "lun": 41,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk42.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk42.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -534,7 +540,7 @@
         "name": "datadisk43",
         "lun": 42,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk43.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk43.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -544,7 +550,7 @@
         "name": "datadisk44",
         "lun": 43,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk44.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk44.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -554,7 +560,7 @@
         "name": "datadisk45",
         "lun": 44,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk45.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk45.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -564,7 +570,7 @@
         "name": "datadisk46",
         "lun": 45,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk46.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk46.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -574,7 +580,7 @@
         "name": "datadisk47",
         "lun": 46,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk47.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk47.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -584,7 +590,7 @@
         "name": "datadisk48",
         "lun": 47,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk48.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk48.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -594,7 +600,7 @@
         "name": "datadisk49",
         "lun": 48,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk49.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk49.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -604,7 +610,7 @@
         "name": "datadisk50",
         "lun": 49,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk50.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk50.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -614,7 +620,7 @@
         "name": "datadisk51",
         "lun": 50,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk51.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk51.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -624,7 +630,7 @@
         "name": "datadisk52",
         "lun": 51,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk52.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk52.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -634,7 +640,7 @@
         "name": "datadisk53",
         "lun": 52,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk53.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk53.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -644,7 +650,7 @@
         "name": "datadisk54",
         "lun": 53,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk54.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk54.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -654,7 +660,7 @@
         "name": "datadisk55",
         "lun": 54,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk55.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk55.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -664,7 +670,7 @@
         "name": "datadisk56",
         "lun": 55,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk56.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk56.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -674,7 +680,7 @@
         "name": "datadisk57",
         "lun": 56,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk57.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk57.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -684,7 +690,7 @@
         "name": "datadisk58",
         "lun": 57,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk58.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk58.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -694,7 +700,7 @@
         "name": "datadisk59",
         "lun": 58,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk59.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk59.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -704,7 +710,7 @@
         "name": "datadisk60",
         "lun": 59,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk60.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk60.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -714,7 +720,7 @@
         "name": "datadisk61",
         "lun": 60,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk61.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk61.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -724,7 +730,7 @@
         "name": "datadisk62",
         "lun": 61,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk62.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk62.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -734,7 +740,7 @@
         "name": "datadisk63",
         "lun": 62,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk63.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk63.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -744,7 +750,7 @@
         "name": "datadisk64",
         "lun": 63,
         "vhd": {
-          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/vhds/', 'datadisk64.vhd')]"
+          "uri": "[concat('http://', variables('storageAccountName'),'.blob.core.windows.net/', parameters('userContainerName'), '/datadisk64.vhd')]"
         },
         "createOption": "Empty",
         "caching": "[variables('diskCaching')]",
@@ -841,7 +847,7 @@
               "uri": "[parameters('osDiskVhdUri')]"
             },
             "vhd": {
-              "uri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob, 'vhds/',variables('vmName'), uniquestring(resourceGroup().id), 'osDisk.vhd')]"
+              "uri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob, 'parameters('userContainerName')/',variables('vmName'), uniquestring(resourceGroup().id), 'osDisk.vhd')]"
             }
           },
 	      "dataDisks": "[take(variables('diskArray'),parameters('numDataDisks'))]"
