@@ -847,7 +847,7 @@
               "uri": "[parameters('osDiskVhdUri')]"
             },
             "vhd": {
-              "uri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob, 'parameters('userContainerName')/',variables('vmName'), uniquestring(resourceGroup().id), 'osDisk.vhd')]"
+              "uri": "[concat(reference(resourceId(parameters('userImageStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('userImageStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob, parameters('userContainerName'), '/', variables('vmName'), uniquestring(resourceGroup().id), 'osDisk.vhd')]"
             }
           },
 	      "dataDisks": "[take(variables('diskArray'),parameters('numDataDisks'))]"
